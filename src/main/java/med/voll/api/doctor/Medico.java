@@ -29,6 +29,8 @@ public class Medico {
     @Getter
     private String crm;
 
+    private boolean ativo;
+
     @Getter
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
@@ -37,6 +39,7 @@ public class Medico {
     private Endereco endereco;
 
     public Medico(RegisterDataMedical dataMedical) {
+        this.ativo = true;
         this.nome = dataMedical.nome();
         this.email = dataMedical.email();
         this.telefone = dataMedical.telefone();
@@ -47,6 +50,26 @@ public class Medico {
 
     public Medico() {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
     public void atualizarInformacoes(@Valid DadosAtualizacaoMedicos dados) {
@@ -65,5 +88,11 @@ public class Medico {
        if (dados.endereco() != null) {
            this.endereco.atualizarEndereco(dados.endereco());
        }
+    }
+
+    public void excluir() {
+
+        this.ativo = false;
+
     }
 }
