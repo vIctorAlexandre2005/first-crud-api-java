@@ -1,13 +1,12 @@
-package med.voll.api.doctor;
+package med.voll.api.domain.doctor;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import med.voll.api.adress.Endereco;
-import med.voll.api.medico.DadosAtualizacaoMedicos;
+import med.voll.api.domain.adress.Endereco;
+import med.voll.api.domain.medico.DadosAtualizacaoMedicos;
 
 @Table(name = "medicos")
 @Entity(name = "Medico")
@@ -70,6 +69,14 @@ public class Medico {
 
     public Especialidade getEspecialidade() {
         return especialidade;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
     }
 
     public void atualizarInformacoes(@Valid DadosAtualizacaoMedicos dados) {
