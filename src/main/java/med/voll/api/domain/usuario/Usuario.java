@@ -39,6 +39,8 @@ public class Usuario implements UserDetails {
         return password;
     }
 
+    public String getLogin() {return login;}
+
     @Override
     public String getUsername() {
         return login;
