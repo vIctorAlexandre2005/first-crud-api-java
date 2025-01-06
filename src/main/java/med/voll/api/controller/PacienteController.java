@@ -1,10 +1,11 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
-import med.voll.api.domain.doctor.Medico;
-import med.voll.api.domain.doctor.RegisterDataMedical;
-import med.voll.api.domain.medico.DadosDetalhamentoMedico;
+import med.voll.api.domain.paciente.DadosDetalhamentoPaciente;
 import med.voll.api.domain.paciente.DadosDetalhePaciente;
+import med.voll.api.domain.paciente.Paciente;
+import med.voll.api.domain.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,15 +18,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/paciente")
 public class PacienteController {
 
+    @Autowired
+    private PacienteRepository repository;
+
     @PostMapping
     @Transactional
     public ResponseEntity register(@RequestBody @Valid DadosDetalhePaciente dadosPaciente, UriComponentsBuilder uriBuilder) {
-        //var dadosMedico = new Medico(dataMedical);
-        // repository.save(dadosMedico);
-        // var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(dadosMedico.getId()).toUri();
-        // return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(dadosMedico));
-
-        return ResponseEntity.ok().build();
+        var dadosPacientes = new Paciente(dadosPaciente);
+        repository.save(dadosPacientes);
+        var uri = uriBuilder.path("/paciente/{id}").buildAndExpand(dadosPacientes.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(dadosPacientes));
     }
 
 }
