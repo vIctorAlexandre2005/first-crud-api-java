@@ -55,4 +55,35 @@ public class PacienteEndereco {
     public String getCep() {
         return cep;
     }
+
+    public void updateEnderecoPaciente(EnderecoPaciente endereco) {
+
+        if (endereco.logradouro() != null) {
+            this.logradouro = endereco.logradouro();
+        }
+
+        if (endereco.bairro() != null) {
+            this.bairro = endereco.bairro();
+        }
+
+        if (endereco.cidade() != null) {
+            this.cidade = endereco.cidade();
+        }
+
+        if (endereco.complemento() != null) {
+            this.complemento = endereco.complemento();
+        }
+
+        if (endereco.numero() != null) {
+            this.numero = endereco.numero();
+        }
+
+        if (endereco.uf() != null) {
+            this.uf = endereco.uf();
+        }
+
+        if (endereco.cep() != null) {
+            this.cep = endereco.cep();
+        }
+    }
 }

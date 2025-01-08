@@ -31,4 +31,12 @@ public class PacienteController {
         return repository.findAll(pagination).map(DadosListagemPaciente::new);
     }
 
+    @PutMapping
+    @Transactional
+    public ResponseEntity updateDataPacientes(@Valid @RequestBody dtoUpdatePaciente updatePaciente) {
+        var pacienteId = repository.getReferenceById(updatePaciente.id());
+        pacienteId.updateInfoPacientes(updatePaciente);
+
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(pacienteId));
+    }
 }

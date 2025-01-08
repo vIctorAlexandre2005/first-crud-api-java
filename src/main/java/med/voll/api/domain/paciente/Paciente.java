@@ -1,6 +1,7 @@
 package med.voll.api.domain.paciente;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -66,5 +67,29 @@ public class Paciente {
 
     public PacienteEndereco getEndereco() {
         return endereco;
+    }
+
+    public void updateInfoPacientes(@Valid dtoUpdatePaciente updatePaciente) {
+
+        if (updatePaciente.nome() != null) {
+            this.nome = updatePaciente.nome();
+        }
+
+        if (updatePaciente.email() != null) {
+            this.email = updatePaciente.email();
+        }
+
+        if (updatePaciente.telefone() != null) {
+            this.telefone = updatePaciente.telefone();
+        }
+
+        if (updatePaciente.cpf() != null) {
+            this.cpf = updatePaciente.cpf();
+        }
+
+        if (updatePaciente.endereco() != null) {
+            this.endereco.updateEnderecoPaciente(updatePaciente.endereco());
+        }
+
     }
 }
