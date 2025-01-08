@@ -42,6 +42,8 @@ public class Paciente {
 
     }
 
+    public Paciente() {}
+
     public Long getId() {
         return id;
     }
