@@ -27,8 +27,9 @@ public class PacienteController {
     }
 
     @GetMapping
-    public Page<DadosListagemPaciente> getPacientes(Pageable pagination) {
-        return repository.findAll(pagination).map(DadosListagemPaciente::new);
+    public ResponseEntity<Page<DadosListagemPaciente>> getPacientes(Pageable pagination) {
+        var responseList = repository.findByActiveTrue(pagination).map(DadosListagemPaciente::new);
+        return ResponseEntity.ok(responseList);
     }
 
     @PutMapping
@@ -37,6 +38,21 @@ public class PacienteController {
         var pacienteId = repository.getReferenceById(updatePaciente.id());
         pacienteId.updateInfoPacientes(updatePaciente);
 
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(pacienteId));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteDataPacientes(@PathVariable Long id) {
+        var pacienteId = repository.getReferenceById(id);
+        pacienteId.delete();
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detailsPaciente(@PathVariable Long id) {
+        var pacienteId = repository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(pacienteId));
     }
 }

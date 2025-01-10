@@ -30,11 +30,13 @@ public class Paciente {
     @Getter
     private String cpf;
 
+    private boolean active;
+
     @Embedded
     private PacienteEndereco endereco;
 
     public Paciente(DadosDetalhePaciente dadosPaciente) {
-
+    this.active = true;
     this.nome = dadosPaciente.nome();
     this.email = dadosPaciente.email();
     this.telefone = dadosPaciente.telefone();
@@ -91,5 +93,9 @@ public class Paciente {
             this.endereco.updateEnderecoPaciente(updatePaciente.endereco());
         }
 
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }
