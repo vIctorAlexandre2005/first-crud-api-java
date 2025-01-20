@@ -16,4 +16,7 @@ public record DadosDetalhamentoConsulta(
         @Future
         LocalDateTime data
 ) {
+    public DadosDetalhamentoConsulta(Consulta consulta) {
+        this(consulta.getId(), consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getData());
+    }
 }
