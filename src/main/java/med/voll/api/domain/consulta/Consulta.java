@@ -31,20 +31,4 @@ public class Consulta {
 
     private LocalDateTime data;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
 }
